@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Mollie Go Client</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"/>
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel='stylesheet' href='//fonts.googleapis.com/css?family=RobotoDraft:regular,bold&amp;lang=en'>
+        <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="import" href="bower_components/polymer/polymer.html">
+
+        <link rel="import" href="bower_components/core-icons/hardware-icons.html">
+        <link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
+        <link rel="import" href="bower_components/core-icon/core-icon.html">
+        <link rel="import" href="bower_components/core-pages/core-pages.html">
+        <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+        <link rel="import" href="bower_components/core-media-query/core-media-query.html">
+        <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+        <link rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html">
+        <link rel="import" href="bower_components/core-image/core-image.html">
+        <link rel="import" href="bower_components/core-localstorage/core-localstorage.html">
+        <link rel="import" href="bower_components/core-label/core-label.html">
+        <link rel="import" href="bower_components/paper-input/paper-input.html">
+        <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+        <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+
+        <link rel="import" href="form.html">
+        <link rel="import" href="products.html">
+        <link rel="import" href="home.html">
+
+        <style shim-shadowdom>
+            body{
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                font-family: 'Roboto', sans-serif;
+                line-height: 140%;
+            }
+            core-toolbar {background-color: transparent;}
+        </style>
+    </head>
+    <body fullbleed layout vertical>
+
+        <template is="auto-binding">
+
+            <core-drawer-panel rightDrawer responsiveWidth="896px">
+
+                <core-header-panel main>
+
+                    <core-toolbar class="core-header">
+                        <span id="title" class="title" flex on-tap="{{link}}">{{namePage}}</span>
+                        <core-icon-button icon="delete" class="clear" on-tap="{{link}}"></core-icon-button>
+                        <core-icon-button icon="file-download" class="admin" on-tap="{{link}}"></core-icon-button>
+                        <core-icon-button core-drawer-toggle icon="shopping-cart"></core-icon-button>
+                    </core-toolbar>
+
+                    <core-pages selected="{{page}}" fit class="content">
+                        <my-menu layout vertical></my-menu>
+                        <my-products layout vertical activePage="{{activePage}}" items="{{items}}" added="{{added}}" cart="{{cart}}"></my-products>
+                    </core-pages>
+
+                </core-header-panel>
+
+                <core-header-panel drawer style="background:#eee; overflow:auto;">
+                    <core-toolbar>
+                      <span flex></span>
+                      <core-icon-button core-drawer-toggle icon="close"></core-icon-button>
+                    </core-toolbar>
+                    <my-form fit items="{{items}}" added="{{added}}" cart="{{cart}}" style="margin-left:10px;" class="content"></my-form>
+                </core-header-panel>
+
+            </core-drawer-panel>
+
+        </template>
+
+        <script>
+            //transitions="cross-fade-all"
+            var t = document.querySelector('body > template')
+
+            t.flag = function(k) {
+                var x = new RegExp("[&\\?]"+k+"=(.*?)(?:&|$|#)")
+                var l = location.search.match(x)
+                if (l) {
+                    t[k]=l[1]
+                    //t.$[k].disabled=true
+                }
+            }
+
+            t.link = function (e,d,s) {
+                switch (s.className){
+                    case "title": location.hash='#!/0/0'; break;
+                    case "clear": localStorage.clear(); location.reload(); break;
+                    case "admin": document.location="/csv.go"; break;
+                    case "about": document.location='https://www.mollie.com'; break;
+                    default:
+                        t.page=1;
+                        document.location='#!/1/'+s.className;
+                    break;
+                }
+            }
+
+            t.items = [
+
+                {
+                    id: '0',
+                    price: 24.90,
+                    album: 'Product 0',
+                    artist: '...',
+                    description: 'description',
+                    bg: '/products/0.png',
+                    link:'https://www.mollie.com'
+                },
+
+                {
+                    id: '1',
+                    price: 24.91,
+                    album: 'Product 1',
+                    artist: '...',
+                    description: 'description',
+                    bg: '/products/0.png',
+                    link:'https://www.mollie.com'
+                }
+
+            ]
+
+            t.addEventListener('template-bound', function(){
+                if (!location.hash) location.hash='#!/0/0'
+                var p = location.hash.substring(3).split("/")
+                t.page = p[0]
+                t.activePage = p[1]
+                switch (t.page){
+                    case "0": t.namePage= "Mollie Go Client"; break;
+                    default: t.namePage = t.items[t.activePage].album; break;
+                }
+                //this.state = this.flag("state")
+            })
+
+            window.addEventListener("hashchange", function(e){
+                if (!location.hash) location.hash='#!/0/0'
+                var p = location.hash.substring(3).split("/")
+                t.page = p[0]
+                t.activePage = p[1]
+                switch (t.page){
+                    case "0": t.namePage= "Mollie Go Client"; break;
+                    default: t.namePage = t.items[t.activePage].album; break;
+                }
+            })
+
+            //window.addEventListener("track", function(e){console.log(e)})
+
+        </script>
+
+    </body>
+</html>

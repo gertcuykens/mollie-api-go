@@ -1,0 +1,63 @@
+application: mollie-api-go
+module: default
+version: v0
+runtime: go
+api_version: go1
+threadsafe: true
+
+handlers:
+- url: /
+  static_files: build/index.html
+  upload: build/index.html
+  mime_type: text/html; charset=UTF-8
+- url: /(.*\.html)
+  static_files: build/\1
+  upload: build/(.*\.html)
+  mime_type: text/html; charset=UTF-8
+- url: /_ah/mail/(.*)
+  script: _go_app
+- url: /(.*\.go)
+  script: _go_app
+- url: /(.*\.csv)
+  script: _go_app
+- url: /(.*\.map)
+  static_files: build/\1
+  upload: build/(.*\.map)
+  mime_type: application/javascript
+- url: /(.*\.(.+))
+  static_files: build/\1
+  upload: build/(.*\.(.+))
+- url: /(.+)/
+  static_files: build/\1/index.html
+  upload: build/(.+)/index.html
+  mime_type: text/html; charset=UTF-8
+- url: /(.+)
+  static_files: build/\1/index.html
+  upload: build/(.+)/index.html
+  mime_type: text/html; charset=UTF-8
+
+inbound_services:
+- mail
+
+skip_files:
+- ^(.*/)?\.git$
+- ^(.*/)?\.gitignore$
+- ^(.*/)?\.idea$
+- ^(.*/)?\.grunt*$
+- ^(.*/)?\.tern*$
+- ^(.*/)?\.sublime*$
+- ^(.*/)?\.DS_Store$
+- ^(.*/)?node_modules$
+- ^(.*/)?gulpfile.js$
+- ^(.*/)?.*\.md$
+- ^(.*/)?.*\.yaml$
+- ^(.*/)?.*\.iml$
+- ^(.*/)?.*\.log$
+- ^(.*/)?.*\.sh$
+- default
+
+#secure: always
+#login: admin
+#http_headers:
+# Content-Type: text/html; charset=UTF-8
+# Access-Control-Allow-Origin: https://accounts.google.com

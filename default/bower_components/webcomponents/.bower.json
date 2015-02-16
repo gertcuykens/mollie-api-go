@@ -1,0 +1,14 @@
+{
+  "name": "webcomponents",
+  "homepage": "https://github.com/Polymer/webcomponents",
+  "_release": "971fa277d6",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "971fa277d640ad8665f68c78decd238251400a7f"
+  },
+  "_source": "git://github.com/Polymer/webcomponents.git",
+  "_target": "*",
+  "_originalSource": "Polymer/webcomponents",
+  "_direct": true
+}
