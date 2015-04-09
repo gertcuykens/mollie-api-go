@@ -21,6 +21,8 @@ import (
 func init() {
 	http.HandleFunc("/mollie.go", payment)
 	http.HandleFunc("/order.go", order)
+	http.HandleFunc("/method.go", method)
+	http.HandleFunc("/issuer.go", issuer)
 	http.HandleFunc("/webhook.go", webhook)
 	http.HandleFunc("/csv.go", hCsv)
 	//http.HandleFunc("/_ah/mail/", incomingMail)

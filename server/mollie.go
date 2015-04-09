@@ -11,6 +11,8 @@ type mollie struct {
 	id       string
 	body     io.Reader
 	amount   string
+	count    string
+	offset   string
 	client   *http.Client
 	response *http.Response
 }
@@ -40,6 +42,20 @@ func (p *mollie) refund() (err error) { //amount=5.95
 
 func (p *mollie) balance() (err error) {
 	request, _ := http.NewRequest("GET", "https://api.mollie.nl/v1/payments/"+p.id+"/refunds", nil)
+	request.Header.Set("Authorization", "Bearer "+p.token)
+	p.response, err = p.client.Do(request)
+	return err
+}
+
+func (p *mollie) method() (err error) {
+	request, _ := http.NewRequest("GET", "https://api.mollie.nl/v1/methods?count=50&offset=0", nil)
+	request.Header.Set("Authorization", "Bearer "+p.token)
+	p.response, err = p.client.Do(request)
+	return err
+}
+
+func (p *mollie) issuer() (err error) {
+	request, _ := http.NewRequest("GET", "https://api.mollie.nl/v1/issuers?count=50&offset=0", nil)
 	request.Header.Set("Authorization", "Bearer "+p.token)
 	p.response, err = p.client.Do(request)
 	return err

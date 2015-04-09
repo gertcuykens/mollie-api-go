@@ -95,5 +95,91 @@ func order(w http.ResponseWriter, r *http.Request) {
 	c.Infof(string(b))
 
 	w.Write(b)
-
 }
+
+func method(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Cache-Control", "must-revalidate")
+	w.Header().Set("Content-Type", "application/json")
+
+	c := appengine.NewContext(r)
+	client := urlfetch.Client(c)
+
+	p := mollie{
+		token:  "test_D3BBiC7YpALzMnXmUKqNpQSzuqdaHa",
+		body:   r.Body,
+		client: client,
+	}
+
+	err := p.method()
+	if err != nil {
+		c.Errorf(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	defer p.response.Body.Close()
+	b, err := ioutil.ReadAll(p.response.Body)
+	if err != nil {
+		c.Errorf(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Write(b)
+}
+
+func issuer(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Cache-Control", "must-revalidate")
+	w.Header().Set("Content-Type", "application/json")
+
+	c := appengine.NewContext(r)
+	client := urlfetch.Client(c)
+
+	p := mollie{
+		token:  "test_D3BBiC7YpALzMnXmUKqNpQSzuqdaHa",
+		body:   r.Body,
+		client: client,
+	}
+
+	err := p.issuer()
+	if err != nil {
+		c.Errorf(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	defer p.response.Body.Close()
+	b, err := ioutil.ReadAll(p.response.Body)
+	if err != nil {
+		c.Errorf(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Write(b)
+}
+
+//v := string(b[:])
+
+//c.Infof(v)
+
+/*type method struct {
+	Id string
+}
+
+var response struct {
+	Data []*method
+}
+
+err = json.Unmarshal(b, &response)
+if err != nil {
+	c.Errorf(err.Error())
+	http.Error(w, err.Error(), http.StatusInternalServerError)
+	return
+}
+
+if &response.Data == nil {
+	c.Errorf(v)
+	http.Error(w, v, http.StatusInternalServerError)
+	return
+}*/

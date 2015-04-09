@@ -142,6 +142,17 @@
                     return
                 }
 
+                if (this.$.ship.checked) {
+                    item = {
+                        "name": "Shipping",
+                        "description": "NL",
+                        "quantity": "1",
+                        "price": String(this.shipping),
+                        "currency": "EUR"
+                    }
+                    items.push(item)
+                }
+
                 this.order.list = items
 
                 this.$.error.innerHTML="Sending order..."

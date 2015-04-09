@@ -1,6 +1,8 @@
 package server
 
 import (
+	"time"
+
 	"appengine"
 	"appengine/datastore"
 )
@@ -14,6 +16,7 @@ type Entity struct {
 	Currency    string
 	Transaction string
 	Status      string
+	Time        time.Time
 }
 
 type Order struct {
@@ -26,6 +29,7 @@ type Order struct {
 func (r *Order) save() error {
 	root := datastore.NewKey(r.Context, "user", r.Email, 0, nil)
 	for _, e := range r.List {
+		e.Time = time.Now()
 		key := datastore.NewKey(r.Context, "order", "", 0, root)
 		k, err := datastore.Put(r.Context, key, e)
 		if err != nil {
