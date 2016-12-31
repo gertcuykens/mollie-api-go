@@ -1,0 +1,26 @@
+{
+  "name": "mollie-api-go",
+  "version": "0.0.0",
+  "private": true,
+  "main": "demo/index.html",
+  "ignore": [
+    "bower_components",
+    "tests",
+    "Makefile",
+    "**/.*"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#2.0-preview",
+    "webcomponentsjs": "#v1",
+    "requirejs": "^2.3.2",
+    "shadydom": "webcomponents/shadydom#master",
+    "shadycss": "webcomponents/shadycss#master",
+    "custom-elements": "webcomponents/custom-elements#master",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.10",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
+    "web-component-tester": "*"
+  }
+}
