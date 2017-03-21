@@ -1,7 +1,7 @@
 .PHONY: test dispatch upload demo html rollback index
 
 test:
-	tsc -w -p demohtml/demohtml.yaml&
+	tsc -w -p demohtml&
 	dev_appserver.py --host=0.0.0.0 demohtml/demohtml.yaml demomodule/demomodule.yaml
 
 dispatch:
