@@ -1,26 +1,26 @@
 import {Order, Product} from 'mixin'
 
 const testJson = {
-  "Email": "test@test",
+  "Email": "test@decorator",
   "Method": "",
   "Issuer": "",
   "Product": [{
-    "Name": "test",
+    "Name": "decorator",
     "Description": "",
-    "Quantity": 2.01,
-    "Price": 1.99,
+    "Quantity": 3.03,
+    "Price": 7.96,
     "Currency": ""
   },
   {
     "Name": "test2",
     "Description": "",
-    "Quantity": 4.01,
-    "Price": 5.99,
+    "Quantity": 2.09,
+    "Price": 0.99,
     "Currency": ""
   }]
 } as Order
 
-localStorage.setObject('test', testJson)
+// localStorage.setObject('test', testJson)
 
 export function defineClass(tagname: string) {
   return function <T extends { new (...args: any[]): HTMLElement }>(constructor: T) {

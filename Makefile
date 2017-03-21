@@ -1,4 +1,4 @@
-.PHONY: test dispatch upload demo html rollback index
+.PHONY: test dispatch upload html rollback index
 
 test:
 	tsc -w -p demohtml&
@@ -7,12 +7,12 @@ test:
 dispatch:
 	appcfg.py update_dispatch ./
 
-upload:	demo html
-
-demo:
+upload:
 	appcfg.py update demomodule/demomodule.yaml
+	appcfg.py update demohtml/demohtml.yaml
 
 html:
+	tsc -p demohtml
 	appcfg.py update demohtml/demohtml.yaml
 
 # rollback:

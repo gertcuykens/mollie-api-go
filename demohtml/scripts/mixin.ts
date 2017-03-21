@@ -1,6 +1,4 @@
 type Constructor<T> = new (...args: any[]) => T;
-// const serverHtml = 'http://localhost:8080/'
-// const serverJson = 'http://localhost:8081/'
 
 export function render < T extends Constructor<HTMLElement> > (Base: T) {
   return class extends Base {
@@ -44,7 +42,7 @@ export type Payment = {
 export function payment < T extends Constructor<HTMLElement> > (Base: T) {
   return class extends Base {
     payment(state: Order):Promise<{}> {
-      return fetch('payment.json', {
+      return fetch('payment.json', { // const serverJson = 'http://localhost:8081/'
         headers: {
           'Accept': 'application/json, text/plain, text/html',
           'Content-Type': 'application/json'

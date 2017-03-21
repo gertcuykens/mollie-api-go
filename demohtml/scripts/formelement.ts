@@ -5,17 +5,35 @@ import {defineClass} from 'decorator'
 @defineClass('form-ts')
 export default class FormElement extends payment(render(HTMLElement)) {
 
-  state: Order
+  state: Order = {
+    "Email": "test@test",
+    "Method": "",
+    "Issuer": "",
+    "Product": [{
+      "Name": "test",
+      "Description": "",
+      "Quantity": 2.01,
+      "Price": 1.99,
+      "Currency": ""
+    },
+    {
+      "Name": "test2",
+      "Description": "",
+      "Quantity": 4.01,
+      "Price": 5.99,
+      "Currency": ""
+    }]
+  }
 
   constructor() {
     super()
-    this.state = {
-      "Email": "",
-      "Method": "",
-      "Issuer": "",
-      "Product": []
-    } as Order
-    this.state = localStorage.getObject('test') as Order
+    // this.state = {
+    //   "Email": "",
+    //   "Method": "",
+    //   "Issuer": "",
+    //   "Product": []
+    // } as Order
+    // this.state = localStorage.getObject('test') as Order
   }
 
   value(name: string): string {

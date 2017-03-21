@@ -35,7 +35,6 @@ handlers:
 skip_files:
 - ^(.*/)?\.DS_Store$
 - ^(.*/)?.*\.yaml$
-- ^(.*/)?.*\.ts$
 - tsconfig.json
 - README.md
 - Makefile
