@@ -1,0 +1,10 @@
+<style>
+  :host {display:table-cell; vertical-align: middle; height:50px;}
+  ul {margin:0; padding:0 5px;}
+  li {display:inline;  padding:0 5px;}
+</style>
+<ul>
+  <li><button>transaction form</button></li>
+  <li><button>last transaction</button></li>
+  <li><button>all transactions</button></li>
+<ul>

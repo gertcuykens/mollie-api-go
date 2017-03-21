@@ -1,0 +1,52 @@
+application: mollie-api-go
+module: default
+version: v1
+runtime: go
+api_version: go1
+threadsafe: true
+
+handlers:
+- url: /(.*\.go)
+  script: _go_app
+- url: /(.*\.csv)
+  script: _go_app
+- url: /(.*\.md)
+  script: _go_app
+- url: /
+  script: _go_app
+- url: /favicon.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+  mime_type: image/x-icon
+- url: /manifest.json
+  static_files: manifest.json
+  upload: manifest.json
+  mime_type: application/json
+- url: /scripts
+  static_dir: scripts
+  mime_type: application/javascript
+- url: /css
+  static_dir: css
+  mime_type: text/css
+- url: /img
+  static_dir: img
+  mime_type: image/png
+
+skip_files:
+- ^(.*/)?\.DS_Store$
+- ^(.*/)?.*\.yaml$
+- ^(.*/)?.*\.ts$
+- tsconfig.json
+- README.md
+- Makefile
+
+# - url: /(.*\.map)
+#   static_files: ./\1
+#   upload: /(.*\.map)
+#   mime_type: application/javascript
+
+# secure: always
+# login: admin
+# http_headers:
+#   Content-Type: text/html; charset=UTF-8
+#   Access-Control-Allow-Origin: https://accounts.google.com

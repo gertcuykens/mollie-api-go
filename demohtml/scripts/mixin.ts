@@ -1,0 +1,132 @@
+type Constructor<T> = new (...args: any[]) => T;
+// const serverHtml = 'http://localhost:8080/'
+// const serverJson = 'http://localhost:8081/'
+
+export function render < T extends Constructor<HTMLElement> > (Base: T) {
+  return class extends Base {
+    render(url: string, state: any):Promise<string> {
+      return fetch(url, {
+        headers: {
+          'Accept': 'text/plain, text/html',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(state)
+      }).then(response => response.text())
+    }
+  }
+}
+
+export type Order = {
+    "Email": string
+    "Method": string
+    "Issuer": string
+    "Product": Array<Product>
+}
+
+export type Product = {
+    "Name": string
+    "Description": string
+    "Quantity": number
+    "Price": number
+    "Currency": string
+}
+
+export type Payment = {
+	"id": string
+	"links": {
+		"paymentUrl": string
+		"redirectUrl":string
+	}
+}
+
+export function payment < T extends Constructor<HTMLElement> > (Base: T) {
+  return class extends Base {
+    payment(state: Order):Promise<{}> {
+      return fetch('payment.json', {
+        headers: {
+          'Accept': 'application/json, text/plain, text/html',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(state)
+      }).then( response => response.json() )
+    }
+  }
+}
+
+export type Transaction = {
+  "Id": string
+  "Mode": string
+  "CreatedDatetime": string
+  "Status": string
+  "PaidDatetime": string
+  "Amount": string
+  "Description": string
+  "Method": string
+  "Metadata": object
+  "Locale": string
+  "Links":{
+    "WebhookUrl": string
+    "RedirectUrl": string
+  }
+}
+
+export function transaction < T extends Constructor<HTMLElement> > (Base: T) {
+  return class extends Base {
+    transaction(id: string):Promise<{}> {
+      return fetch('transaction.json?id='+id, {
+        headers: {
+          'Accept': 'application/json, text/plain, text/html',
+        },
+        method: 'GET',
+        mode: 'cors'
+      }).then( response => response.json() )
+    }
+  }
+}
+
+export type Method = {
+  resource: string
+  id: string
+  description: string
+  amount: object
+  image: object
+}
+
+export function method < T extends Constructor<HTMLElement> > (Base: T) {
+  return class extends Base {
+    method():Promise<{}> {
+      return fetch('method.json', {
+        headers: {
+          'Accept': 'application/json, text/plain, text/html'
+        },
+        method: 'GET',
+        mode: 'cors'
+      }).then( response => response.json() )
+    }
+  }
+}
+
+export type Issuer = {
+  resource: string
+  id: string
+  name: string
+  method: string
+}
+
+export function issuer < T extends Constructor<HTMLElement> > (Base: T) {
+  return class extends Base {
+    issuer():Promise<{}> {
+      return fetch('issuer.json', {
+        headers: {
+          'Accept': 'application/json, text/plain, text/html'
+        },
+        method: 'GET',
+        mode: 'cors'
+      }).then( response => response.json() )
+    }
+  }
+}

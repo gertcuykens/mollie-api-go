@@ -6,9 +6,4 @@ Mollie api.
 
     go get -u github.com/gertcuykens/mollie-api-go
 
-## Demo
-    
-    bower install
-    make demo
-
-mollie-api-go [demo](http://localhost:8080)
+server [demo](http://localhost:8080)

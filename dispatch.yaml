@@ -1,0 +1,19 @@
+application: mollie-api-go
+
+dispatch:
+- url: "*/_ah/*"
+  module: demo
+- url: "*/method.json"
+  module: demo
+- url: "*/issuer.json"
+  module: demo
+- url: "*/webhook.json"
+  module: demo
+- url: "*/transaction.json"
+  module: demo
+- url: "*/payment.json"
+  module: demo
+- url: "*/payment.csv"
+  module: demo
+- url: "*/"
+  module: default

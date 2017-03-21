@@ -1,0 +1,84 @@
+<style>
+  th {text-align: left;}
+</style>
+<form>
+  <table>
+    <tr>
+      <th>Email:</th>
+      <th>Method:</th>
+      <th>Issuer:</th>
+    </tr>
+    <tr>
+      <td><input name="Email" value="{{.Email}}"></td>
+      <td>
+        <method-ts>
+          <select name="Method" slot="input">
+            <option value="{{.Method}}" selected>{{.Method}}</option>
+          </select>
+        </method-ts>
+      </td>
+      <td>
+        <issuer-ts>
+          <select name="Issuer" slot="input">
+            <option value="{{.Issuer}}" selected>{{.Issuer}}</option>
+          </select>
+        </issuer-ts>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr><td colspan="7"><hr style="border: 1px solid black;"></td></tr>
+    <tr>
+      <th>Name:</th>
+      <th>Description:</th>
+      <th style="width:75px; text-align: right;">Quantity:</th>
+      <th style="width:75px; text-align: right;">Price:</th>
+      <th style="width:75px; text-align: right;">Total:</th>      
+      <th></th>
+      <th></th>
+    </tr>
+    <tr>
+      <td><input name="Name"></td>
+      <td><input name="Description"></td>
+      <td><input name="Quantity" style="width:75px; text-align:right;"></td>
+      <td><input name="Price" style="width:75px; text-align:right;"></td>      
+      <td id="total" style="text-align:right;"></td>
+      <td><input name="Currency" value="" hidden></td>
+      <td><button style="width:100%" type="button">Add</button></td>
+    </tr>
+    <tr><td colspan="7"><hr style="border: 1px solid black;"></td></tr>
+    {{range .Product}}
+    <tr>
+      <td>{{.Name}}</td>
+      <td>{{.Description}}</td>
+      <td style="text-align:right;">{{.Quantity}}</td>
+      <td style="text-align:right;">{{.Price}}</td>
+      <td style="text-align:right;">{{multiply .Quantity .Price | printf "%.2f"}}</td>
+      <td>{{.Currency}}</td>
+      <td><button style="width:100%" type="button">Remove</button></td>
+    </tr>
+    {{end}}
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>      
+      <td style="text-align:right;">
+        <span style="border-top:1px solid black;">{{total | printf "%.2f"}}</span>
+      </td>
+      <td>&euro;</td>
+      <td><button style="width:100%" type="button">Submit</button></td>
+    </tr>
+  </table>
+</form>
+<template>
+  <tr>
+    <td></td>
+    <td></td>
+    <td style="text-align:right;"></td>
+    <td style="text-align:right;"></td>
+    <td style="text-align:right;"></td>
+    <td></td>
+    <td><button style="width:100%" type="button">Remove</button></td>      
+  </tr>
+</template>

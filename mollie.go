@@ -27,7 +27,7 @@ type Transaction struct {
 	Amount          string
 	Description     string
 	Method          string
-	Metadata        map[string]string
+	Metadata        map[string]string `datastore:"-"`
 	details         struct {
 		CardNumber string
 	}
@@ -35,7 +35,7 @@ type Transaction struct {
 	Links  struct {
 		WebhookUrl  string
 		RedirectUrl string
-	}
+	} `datastore:"-"`
 }
 
 // Token Mollie
@@ -86,7 +86,7 @@ func Issuer(client *http.Client) (response *http.Response, err error) {
 }
 
 // Webhook Mollie
-func Webhook(client *http.Client, id string, fn func(k string, v string)) error {
+func Webhook(client *http.Client, id string, fn func(t Transaction) error) error {
 
 	response, err := GetTransaction(client, id)
 	if err != nil {
@@ -102,10 +102,6 @@ func Webhook(client *http.Client, id string, fn func(k string, v string)) error 
 		return err
 	}
 
-	for k, v := range t.Metadata {
-		fn(k, v)
-	}
-
-	return nil
+	return fn(t)
 
 }

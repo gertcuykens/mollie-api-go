@@ -1,0 +1,35 @@
+/// <amd-module name="menuelement"/>
+import {render} from 'mixin'
+import {defineClass} from 'decorator'
+
+@defineClass('menu-ts')
+export default class MenuElement extends render(HTMLElement) {
+  constructor() {
+    super()
+  }
+
+  renderCallback(root:ShadowRoot){
+    const click1 = new CustomEvent('form', {'detail': null})
+    const click2 = new CustomEvent('transaction', {'detail': null})
+    const li = root.querySelectorAll('li')
+    if (2 < li.length) {
+      li[0].addEventListener('click', ()=>{ this.dispatchEvent(click1) })
+      li[1].addEventListener('click', ()=>{ this.dispatchEvent(click2) })
+      li[2].addEventListener('click', ()=>{ document.location.href = 'payment.csv' }) // http://localhost:8081/
+    }
+  }
+
+  connectedCallback() { 
+    this.render('menu.md', {})
+      .then(text => {
+        const root = this.attachShadow({mode: 'open'});
+        root.innerHTML = text;
+        this.renderCallback(root)
+      })
+      .catch(err => console.log(err))
+  }
+  
+  disconnectedCallback() { }
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) { }
+  adoptedCallback() { }
+}

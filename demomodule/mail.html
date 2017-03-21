@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Demo</title>
+  <style>
+    table,
+    td {
+      border-collapse: collapse;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <p>Email: {{.Email}}</p>
+
+  <table>
+    <tr>
+      <th style="text-align:left">Product</th>
+      <th style="text-align:right">Quantity</th>
+      <th style="text-align:right">Price</th>
+      <th style="text-align:right">Total</th>
+    </tr>
+    {{range .Product}}
+    <tr>
+      <td>{{.Name}}</td>
+      <td style="text-align:right; width:75px;">{{.Quantity | printf "%.2f"}}</td>
+      <td style="text-align:right; width:50px;">{{.Price | printf "%.2f"}}</td>      
+      <td style="text-align:right; width:50px;">{{multiply .Quantity .Price | printf "%.2f"}}</td>
+      <td></td>
+    </tr>
+    {{end}}
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style=" text-align:right; padding-left:5px; min-width:50px;">
+        <span style="border-top:1px solid black;">{{total | printf "%.2f"}}</span>
+      </td>
+      <td>&euro;</td>
+    </tr>
+  </table>
+
+</body>
+
+</html>
