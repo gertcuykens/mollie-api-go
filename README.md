@@ -6,4 +6,4 @@ Mollie api.
 
     go get -u github.com/gertcuykens/mollie-api-go
 
-server [demo](http://localhost:8080)
+You need Chrome for this [demo](https://mollie-api-go.appspot.com)

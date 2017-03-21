@@ -1,6 +1,6 @@
 # mollie-api-go
 
-Appengine module server.
+Appengine demo module.
 
 ## Install
 

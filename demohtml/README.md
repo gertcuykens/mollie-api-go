@@ -1,6 +1,6 @@
 # mollie-api-go
 
-Appengine default server.
+Appengine default module.
 
 ## Install
 
