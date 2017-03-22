@@ -1,5 +1,5 @@
 /// <amd-module name="formelement"/>
-import {Payment, Order, Product, payment, render,} from 'mixin'
+import {Payment, Order, Product, payment, render} from 'mixin'
 import {defineClass} from 'decorator'
 
 @defineClass('form-ts')

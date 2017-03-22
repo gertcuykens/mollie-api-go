@@ -1,4 +1,4 @@
-import {Order, Product} from 'mixin'
+import {Order} from 'mixin'
 
 const testJson = {
   "Email": "test@decorator",
