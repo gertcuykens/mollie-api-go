@@ -2,17 +2,17 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es2017",
-    "module": "amd",
+    "module": "none",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strictNullChecks": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "lib": [
       "es2017",
-      "dom"
+      "webworker"
     ]
   }
 }

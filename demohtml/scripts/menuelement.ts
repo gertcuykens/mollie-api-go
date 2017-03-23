@@ -11,16 +11,18 @@ export default class MenuElement extends render(HTMLElement) {
   renderCallback(root:ShadowRoot){
     const click1 = new CustomEvent('form', {'detail': null})
     const click2 = new CustomEvent('transaction', {'detail': null})
+    const test = new CustomEvent('test', {'detail': null})    
     const li = root.querySelectorAll('li')
     if (2 < li.length) {
       li[0].addEventListener('click', ()=>{ this.dispatchEvent(click1) })
       li[1].addEventListener('click', ()=>{ this.dispatchEvent(click2) })
       li[2].addEventListener('click', ()=>{ document.location.href = 'payment.csv' }) // http://localhost:8081/
+      li[3].addEventListener('click', ()=>{ this.dispatchEvent(test) })
     }
   }
 
   connectedCallback() { 
-    this.render('menu.md', {})
+    this.render('menu.md')
       .then(text => {
         const root = this.attachShadow({mode: 'open'});
         root.innerHTML = text;

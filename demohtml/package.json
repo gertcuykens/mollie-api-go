@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Mollie example",
   "private": true,
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/requirejs": "^2.1.28"
+  },
   "dependencies": {
-    "@types/requirejs": "^2.1.28",
     "alameda": "^1.1.2"
   },
   "scripts": {

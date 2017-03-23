@@ -6,31 +6,35 @@ api_version: go1
 threadsafe: true
 
 handlers:
-- url: /(.*\.go)
-  script: _go_app
-- url: /(.*\.csv)
-  script: _go_app
 - url: /(.*\.md)
   script: _go_app
+  secure: always
 - url: /
   script: _go_app
+  secure: always
 - url: /favicon.ico
   static_files: favicon.ico
   upload: favicon.ico
   mime_type: image/x-icon
+  secure: always
 - url: /manifest.json
   static_files: manifest.json
   upload: manifest.json
   mime_type: application/json
+  secure: always
+- url: /service.js
+  static_files: service.js
+  upload: service.js
+  mime_type: application/javascript
+  secure: always
 - url: /scripts
   static_dir: scripts
   mime_type: application/javascript
-- url: /css
-  static_dir: css
-  mime_type: text/css
+  secure: always
 - url: /img
   static_dir: img
   mime_type: image/png
+  secure: always
 
 skip_files:
 - ^(.*/)?\.DS_Store$

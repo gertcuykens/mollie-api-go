@@ -6,14 +6,10 @@ api_version: go1
 threadsafe: true
 
 handlers:
-- url: /_ah/mail/(.*)
-  script: _go_app
-- url: /_ah/bounce
-  script: _go_app
 - url: /(.*\.json)
   script: _go_app
-- url: /(.*\.csv)
-  script: _go_app
+  secure: always
+# redirect_http_response_code: 301
 
 inbound_services:
 - mail
@@ -24,3 +20,12 @@ skip_files:
 - ^(.*/)?.*\.yaml$
 - README.md
 - Makefile
+
+# - url: /_ah/mail/(.*)
+#   script: _go_app
+# - url: /_ah/bounce
+#   script: _go_app
+# - url: /(.*\.json)
+#   script: _go_app
+# - url: /(.*\.csv)
+#   script: _go_app

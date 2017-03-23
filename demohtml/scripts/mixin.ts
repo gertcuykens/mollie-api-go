@@ -2,15 +2,15 @@ type Constructor<T> = new (...args: any[]) => T;
 
 export function render < T extends Constructor<HTMLElement> > (Base: T) {
   return class extends Base {
-    render(url: string, state: any):Promise<string> {
+    render(url: string):Promise<string> {
       return fetch(url, {
         headers: {
           'Accept': 'text/plain, text/html',
+          'Accept-Encoding': 'gzip',
           'Content-Type': 'application/json'
         },
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify(state)
+        method: 'GET',
+        mode: 'cors'
       }).then(response => response.text())
     }
   }
@@ -42,9 +42,10 @@ export type Payment = {
 export function payment < T extends Constructor<HTMLElement> > (Base: T) {
   return class extends Base {
     payment(state: Order):Promise<{}> {
-      return fetch('payment.json', { // const serverJson = 'http://localhost:8081/'
+      return fetch('payment.json', {
         headers: {
-          'Accept': 'application/json, text/plain, text/html',
+          'Accept': 'application/json',
+          'Accept-Encoding': 'gzip',
           'Content-Type': 'application/json'
         },
         method: 'POST',
@@ -77,9 +78,10 @@ export function transaction < T extends Constructor<HTMLElement> > (Base: T) {
     transaction(id: string):Promise<{}> {
       return fetch('transaction.json?id='+id, {
         headers: {
-          'Accept': 'application/json, text/plain, text/html',
+          'Accept': 'application/json',
+          'Accept-Encoding': 'gzip'
         },
-        method: 'GET',
+        method: 'POST',
         mode: 'cors'
       }).then( response => response.json() )
     }
@@ -99,9 +101,10 @@ export function method < T extends Constructor<HTMLElement> > (Base: T) {
     method():Promise<{}> {
       return fetch('method.json', {
         headers: {
-          'Accept': 'application/json, text/plain, text/html'
+          'Accept': 'application/json',
+          'Accept-Encoding': 'gzip'
         },
-        method: 'GET',
+        method: 'POST',
         mode: 'cors'
       }).then( response => response.json() )
     }
@@ -120,9 +123,10 @@ export function issuer < T extends Constructor<HTMLElement> > (Base: T) {
     issuer():Promise<{}> {
       return fetch('issuer.json', {
         headers: {
-          'Accept': 'application/json, text/plain, text/html'
+          'Accept': 'application/json',
+          'Accept-Encoding': 'gzip'
         },
-        method: 'GET',
+        method: 'POST',
         mode: 'cors'
       }).then( response => response.json() )
     }

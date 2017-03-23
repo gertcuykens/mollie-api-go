@@ -18,7 +18,7 @@ func init() {
 
 func menu(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 
-	md, err := ioutil.ReadFile("md/menu.md")
+	md, err := ioutil.ReadFile("md/menu.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

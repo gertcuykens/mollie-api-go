@@ -7,8 +7,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"net/http"
+	"net/url"
 	"strings"
 
 	"github.com/gertcuykens/httx"
@@ -35,12 +35,17 @@ func form(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	defer r.Body.Close()
-	b, err := ioutil.ReadAll(r.Body)
+	j, err := url.QueryUnescape(r.FormValue("json"))
+	if err != nil {
+		w.Write([]byte(j))
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	var o order
-	err = json.Unmarshal(b, &o)
+	err = json.Unmarshal([]byte(j), &o)
 	if err != nil {
+		w.Write([]byte(j))
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

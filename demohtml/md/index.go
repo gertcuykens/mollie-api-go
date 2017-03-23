@@ -18,7 +18,7 @@ func init() {
 
 func push1(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 
-	md, err := ioutil.ReadFile("md/index.md")
+	md, err := ioutil.ReadFile("md/index.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

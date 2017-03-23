@@ -35,7 +35,6 @@ String.prototype.loadScript = function (this:string) {
 interface Number {
   round2: (this:number) => number
   round2f: (this:number) => string
-  
 }
 
 Number.prototype.round2 = function (this:Number) {  

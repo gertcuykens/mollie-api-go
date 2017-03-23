@@ -1,17 +1,18 @@
-ALL := $(wildcard css/*.css)
-CSS := $(filter-out %.min.css,$(ALL))
+#ALL := $(wildcard css/*.css)
+#CSS := $(filter-out %.min.css,$(ALL))
 JS := $(wildcard scripts/*.js)
 
 .PHONY: uglify build install clean demo
 
-uglify: build $(CSS) $(JS)
+uglify: build $(JS) #$(CSS)
 	uglifyjs node_modules/alameda/alameda.js -o scripts/alameda.js -c
-
-%.css:
-	uglifycss $@ > $(patsubst %.css,%.min.css,$@)
+	uglifyjs ../demoservice/service.js -o scripts/service.js -c
 
 %.js:
 	uglifyjs $@ -o $@ -c
+
+#%.css:
+#	uglifycss $@ > $(patsubst %.css,%.min.css,$@)
 
 build:
 	tsc --pretty

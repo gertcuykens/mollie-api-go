@@ -6,7 +6,7 @@ import {defineClass} from 'decorator'
 export default class FormElement extends payment(render(HTMLElement)) {
 
   state: Order = {
-    "Email": "test@test",
+    "Email": "test@test -,_.!'~*()",
     "Method": "",
     "Issuer": "",
     "Product": [{
@@ -78,7 +78,7 @@ export default class FormElement extends payment(render(HTMLElement)) {
 
     const span = table[1].querySelector('span')
     if (!span) return
-    span.innerText = this.total2()
+    span.innerText = this.total()
   }
 
   rm(btn:HTMLButtonElement) {
@@ -96,7 +96,7 @@ export default class FormElement extends payment(render(HTMLElement)) {
     
     const span = table.querySelector('span')
     if (!span) return
-    span.innerText = this.total2()
+    span.innerText = this.total()
   }
 
   submit() {
@@ -117,13 +117,13 @@ export default class FormElement extends payment(render(HTMLElement)) {
       .catch(err => console.log(err))
   }
 
-  total2(){
+  total(){
     return this.state.Product.reduce(function(acc, val) {
         return acc + (val.Price * val.Quantity)
       }, 0).round2f()
   }
 
-  total() {
+  totalChanged() {
     if (!this.shadowRoot) return
     const t = this.shadowRoot.querySelector('#total')
     const n = Number(this.value('[name="Price"]')) * Number(this.value('[name="Quantity"]'))
@@ -132,10 +132,10 @@ export default class FormElement extends payment(render(HTMLElement)) {
 
   renderCallback(root:ShadowRoot) {
     let input = root.querySelector('[name="Price"]') as HTMLInputElement
-    input.addEventListener('change', this.total.bind(this))
+    input.addEventListener('change', this.totalChanged.bind(this))
 
     input = root.querySelector('[name="Quantity"]') as HTMLInputElement
-    input.addEventListener('change', this.total.bind(this))
+    input.addEventListener('change', this.totalChanged.bind(this))
     
     const btn = root.querySelectorAll('button')
     if (2 > btn.length) return
@@ -146,8 +146,9 @@ export default class FormElement extends payment(render(HTMLElement)) {
     }
   }
 
-  connectedCallback() { 
-    this.render('form.md', this.state)
+  connectedCallback() {
+    const uri = encodeURIComponent(JSON.stringify(this.state))
+    this.render('form.md?json='+uri)
       .then(text => {
         const root = this.attachShadow({mode: 'open'});
         root.innerHTML = text;
