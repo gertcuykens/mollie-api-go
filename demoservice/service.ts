@@ -40,7 +40,7 @@ self.addEventListener('activate', (event:any) => {
 })
 
 self.addEventListener('fetch', (event:any) => {
-  let request = event.request
+  const request = event.request
   if (request.method !== 'GET') return
   event.respondWith( caches.match(request)
     .then( cachedResponse => {
