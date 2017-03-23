@@ -46,7 +46,8 @@ export function payment < T extends Constructor<HTMLElement> > (Base: T) {
         headers: {
           'Accept': 'application/json',
           'Accept-Encoding': 'gzip',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Cache-control': 'no-cache'
         },
         method: 'POST',
         mode: 'cors',
@@ -79,9 +80,10 @@ export function transaction < T extends Constructor<HTMLElement> > (Base: T) {
       return fetch('transaction.json?id='+id, {
         headers: {
           'Accept': 'application/json',
-          'Accept-Encoding': 'gzip'
+          'Accept-Encoding': 'gzip',
+          'Cache-control': 'no-cache'
         },
-        method: 'POST',
+        method: 'GET',
         mode: 'cors'
       }).then( response => response.json() )
     }
@@ -102,9 +104,10 @@ export function method < T extends Constructor<HTMLElement> > (Base: T) {
       return fetch('method.json', {
         headers: {
           'Accept': 'application/json',
-          'Accept-Encoding': 'gzip'
+          'Accept-Encoding': 'gzip',
+          'Cache-control': 'no-cache'
         },
-        method: 'POST',
+        method: 'GET',
         mode: 'cors'
       }).then( response => response.json() )
     }
@@ -124,9 +127,10 @@ export function issuer < T extends Constructor<HTMLElement> > (Base: T) {
       return fetch('issuer.json', {
         headers: {
           'Accept': 'application/json',
-          'Accept-Encoding': 'gzip'
+          'Accept-Encoding': 'gzip',
+          'Cache-control': 'no-cache'
         },
-        method: 'POST',
+        method: 'GET',
         mode: 'cors'
       }).then( response => response.json() )
     }
