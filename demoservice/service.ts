@@ -60,3 +60,6 @@ self.addEventListener('fetch', (event:any) => {
 //   event.respondWith( fetch(request) )
 //   return
 // }
+
+// if (request.headers.get('Cache-control') === 'no-cache') return
+// console.log('SW :', request.headers.get('Cache-control'))

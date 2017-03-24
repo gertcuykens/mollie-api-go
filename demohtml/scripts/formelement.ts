@@ -62,7 +62,7 @@ export default class FormElement extends payment(render(HTMLElement)) {
     td[3].innerText = this.value('[name="Price"]')
     const n = Number(this.value('[name="Price"]')) * Number(this.value('[name="Quantity"]'))
     td[4].innerText = String( n.round2f() )
-    
+
     const table = this.shadowRoot.querySelectorAll('table')
     if (1 > table.length) return
     const tr = table[1].querySelectorAll('tr')

@@ -39,8 +39,14 @@ function show(...args:string[]) {
   })
 })()
 
-// var link = document.createElement('link');
-// link.rel = 'import';
-// link.href = '';
-// link.setAttribute('async', '')
-// document.head.appendChild(link)
+function link(href:string):Promise<{}> {
+  return new Promise((resolve, reject) => {
+    const link = document.createElement('link')
+    link.rel = 'import'
+    link.href = href
+    link.onload = resolve
+    link.onerror = reject
+    link.setAttribute('async', '')
+    document.head.appendChild(link)
+  })
+}
