@@ -1,39 +1,15 @@
 /// <amd-module name="formelement"/>
 import {Payment, Order, Product, payment, render} from 'mixin'
-import {defineClass} from 'decorator'
+import {defineClass, state, query} from 'decorator'
 
 @defineClass('form-ts')
 export default class FormElement extends payment(render(HTMLElement)) {
 
-  state: Order = {
-    "Email": "test@test -,_.!'~*()",
-    "Method": "",
-    "Issuer": "",
-    "Product": [{
-      "Name": "test",
-      "Description": "",
-      "Quantity": 2.01,
-      "Price": 1.99,
-      "Currency": ""
-    },
-    {
-      "Name": "test2",
-      "Description": "",
-      "Quantity": 4.01,
-      "Price": 5.99,
-      "Currency": ""
-    }]
-  }
+  @state('test')
+  state: Order
 
   constructor() {
     super()
-    // this.state = {
-    //   "Email": "",
-    //   "Method": "",
-    //   "Issuer": "",
-    //   "Product": []
-    // } as Order
-    // this.state = localStorage.getObject('test') as Order
   }
 
   value(name: string): string {
@@ -119,13 +95,12 @@ export default class FormElement extends payment(render(HTMLElement)) {
 
   total(){
     return this.state.Product.reduce(function(acc, val) {
-        return acc + (val.Price * val.Quantity)
-      }, 0).round2f()
+      return acc + (val.Price * val.Quantity)
+    }, 0).round2f()
   }
 
-  totalChanged() {
-    if (!this.shadowRoot) return
-    const t = this.shadowRoot.querySelector('#total')
+  @query('#total')
+  totalChanged(t:Element|null) {
     const n = Number(this.value('[name="Price"]')) * Number(this.value('[name="Quantity"]'))
     if (t) t.innerHTML = String( n.round2f() )
   }
