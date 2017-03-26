@@ -25,10 +25,11 @@ function show(...args:string[]) {
 }
 
 ;(function(){
+  const scripts:string[] = []
   const menu = document.querySelector('menu-ts')
-  menu!.addEventListener('transaction', () => { script('./scripts/transactionelement.js').then( () => show('menu-ts', 'transaction-ts') ) })      
-  menu!.addEventListener('form', () => { script('./scripts/formelement.js', './scripts/issuerelement.js', './scripts/methodelement.js').then( () => show('menu-ts', 'form-ts') ) })
-  menu!.addEventListener('test', () => { script('./scripts/formelement_test.js').then( () => show('menu-ts', 'form-test') ) })
+  menu!.addEventListener('transaction', () => { script(scripts, './scripts/transactionelement.js').then( () => show('menu-ts', 'transaction-ts') ) })      
+  menu!.addEventListener('form', () => { script(scripts, './scripts/formelement.js', './scripts/issuerelement.js', './scripts/methodelement.js').then( () => show('menu-ts', 'form-ts') ) })
+  menu!.addEventListener('test', () => { script(scripts, './scripts/formelement_test.js').then( () => show('menu-ts', 'form-test') ) })
   menu!.addEventListener('online', () => { online(); show('menu-ts') })
   menu!.addEventListener('offline', () => { offline(); show('menu-ts') })
   const page = window.location.search.substr(1)
@@ -37,12 +38,11 @@ function show(...args:string[]) {
   menu!.dispatchEvent(event)
 })()
 
-const scripts:string[] = []
-function script(...href:string[]):Promise<{}> {
+function script(scripts:string[], ...href:string[]):Promise<{}> {
   const p:Promise<{}>[] = []
   for (let i=0; i < href.length; ++i) {
     let c = false
-    scripts.forEach( v => { if ( v == href[i] ) c = true } )
+    scripts.forEach( v => { if (v == href[i]) c = true } )
     if (c) continue
     scripts.push(href[i])
     p.push( new Promise( (resolve, reject) => {
