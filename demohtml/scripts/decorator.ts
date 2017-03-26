@@ -33,8 +33,9 @@ const emptyOrder = {
 export function defineClass(tagname: string) {
   return function <T extends { new (...args: any[]): HTMLElement }>(constructor: T) {
     console.log("Define: " + constructor.name)
-    window.customElements.define(tagname, constructor)
-    return class extends constructor {}
+    const generated = class extends constructor { }
+    customElements.define(tagname, generated)
+    return generated
   }
 }
 

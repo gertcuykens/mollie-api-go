@@ -37,17 +37,24 @@ function show(...args:string[]) {
   menu!.dispatchEvent(event)
 })()
 
+const scripts:string[] = []
 function script(...href:string[]):Promise<{}> {
   const p:Promise<{}>[] = []
-  href.forEach( v => p.push( new Promise( (resolve, reject) => {
-    const script = document.createElement('script')
-    script.type = 'module'
-    script.src = v
-    script.onload = resolve
-    script.onerror = reject
-    script.setAttribute('async', '')
-    document.body.appendChild(script)
-  })))
+  for (let i=0; i < href.length; ++i) {
+    let c = false
+    scripts.forEach( v => { if ( v == href[i] ) c = true } )
+    if (c) continue
+    scripts.push(href[i])
+    p.push( new Promise( (resolve, reject) => {
+      const script = document.createElement('script')
+      script.type = 'module'
+      script.src = href[i]
+      script.onload = resolve
+      script.onerror = reject
+      script.setAttribute('async', '')
+      document.body.appendChild(script)
+    }))
+  }
   return Promise.all([p])
 }
 
