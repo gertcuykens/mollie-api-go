@@ -1,6 +1,5 @@
-/// <amd-module name="issuerelement"/>
-import {defineClass} from 'decorator'
-import {Issuer, issuer} from 'mixin'
+import {defineClass} from './decorator.js'
+import {Issuer, issuer} from './mixin.js'
 
 @defineClass('issuer-ts')
 export default class IssuerElement extends issuer(HTMLElement) {

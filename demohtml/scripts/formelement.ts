@@ -1,6 +1,5 @@
-/// <amd-module name="formelement"/>
-import {Payment, Order, Product, payment, render} from 'mixin'
-import {defineClass, state, query} from 'decorator'
+import {Payment, Order, Product, payment, render} from './mixin.js'
+import {defineClass, state, query} from './decorator.js'
 
 @defineClass('form-ts')
 export default class FormElement extends payment(render(HTMLElement)) {

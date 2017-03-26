@@ -1,6 +1,5 @@
-/// <amd-module name="menuelement"/>
-import {render} from 'mixin'
-import {defineClass} from 'decorator'
+import {render} from './mixin.js'
+import {defineClass} from './decorator.js'
 
 @defineClass('menu-ts')
 export default class MenuElement extends render(HTMLElement) {
@@ -28,7 +27,7 @@ export default class MenuElement extends render(HTMLElement) {
       })
       .catch(err => console.log(err))
   }
-  
+
   disconnectedCallback() { }
   attributeChangedCallback(name: string, oldValue: string, newValue: string) { }
   adoptedCallback() { }

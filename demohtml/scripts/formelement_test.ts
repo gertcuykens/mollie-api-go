@@ -1,7 +1,6 @@
-/// <amd-module name="formelement_test"/>
-import FormElement from 'formelement'
-import {defineClass} from 'decorator'
-import {Payment, Order, Product, payment, render} from 'mixin'
+import FormElement from './formelement.js'
+import {defineClass} from './decorator.js'
+import {Payment, Order, Product, payment, render} from './mixin.js'
 
 @defineClass('form-test')
 export default class FormElement_test extends FormElement {

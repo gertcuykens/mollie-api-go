@@ -1,6 +1,5 @@
-/// <amd-module name="transactionelement"/>
-import {Transaction, transaction} from 'mixin'
-import {defineClass} from 'decorator'
+import {Transaction, transaction} from './mixin.js'
+import {defineClass} from './decorator.js'
 
 @defineClass('transaction-ts')
 export default class TransactionElement extends transaction(HTMLElement) {

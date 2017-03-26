@@ -1,6 +1,5 @@
-/// <amd-module name="methodelement"/>
-import {defineClass} from 'decorator'
-import {Method, method} from 'mixin'
+import {defineClass} from './decorator.js'
+import {Method, method} from './mixin.js'
 
 @defineClass('method-ts')
 export default class MethodElement extends method(HTMLElement) {

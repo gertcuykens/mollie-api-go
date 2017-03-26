@@ -1,4 +1,4 @@
-import {Order} from 'mixin'
+import {Order} from './mixin.js'
 
 const testOrder = {
   "Email": "test@test -,_.!'~*()",

@@ -21,7 +21,6 @@ install:
 	npm i typescript -g
 	npm i uglifyjs -g
 	npm i uglifycss -g
-	npm i
 
 clean:
 	-rm scripts/*.js
