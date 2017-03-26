@@ -42,7 +42,7 @@ function script(...href:string[]):Promise<{}> {
   href.forEach( v => p.push( new Promise( (resolve, reject) => {
     const script = document.createElement('script')
     script.type = 'module'
-    script.src = href[0]
+    script.src = v
     script.onload = resolve
     script.onerror = reject
     script.setAttribute('async', '')
