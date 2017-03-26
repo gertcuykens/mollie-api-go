@@ -28,10 +28,8 @@ export default class FormElement extends payment(render(HTMLElement)) {
     }
     this.state['Product'].unshift(product)
 
-    if (!this.shadowRoot) return
-    const t = this.shadowRoot.querySelector('template')
-    if (!t) return
-    const td = t.content.querySelectorAll('td')
+    const t = this.shadowRoot!.querySelector('template')
+    const td = t!.content.querySelectorAll('td')
     td[0].innerText = this.value('[name="Name"]')
     td[1].innerText = this.value('[name="Description"]')
     td[2].innerText = this.value('[name="Quantity"]')
@@ -39,40 +37,30 @@ export default class FormElement extends payment(render(HTMLElement)) {
     const n = Number(this.value('[name="Price"]')) * Number(this.value('[name="Quantity"]'))
     td[4].innerText = String( n.round2f() )
 
-    const table = this.shadowRoot.querySelectorAll('table')
-    if (1 > table.length) return
+    const table = this.shadowRoot!.querySelectorAll('table')
     const tr = table[1].querySelectorAll('tr')
-    if(5 > tr.length) return
     const parent = tr[4].parentNode
-    if(!parent) return
-    const clone = document.importNode(t.content, true)
-    parent.insertBefore(clone, tr[4])
+    const clone = document.importNode(t!.content, true)
+    parent!.insertBefore(clone, tr[4])
 
     const btn = table[1].querySelectorAll('button')
-    if (1 > btn.length) return
     btn[1].addEventListener('click', ()=>{ this.rm(btn[1]) } )
 
     const span = table[1].querySelector('span')
-    if (!span) return
-    span.innerText = this.total()
+    span!.innerText = this.total()
   }
 
   rm(btn:HTMLButtonElement) {
-    if (!btn.parentNode) return
-    const tr = btn.parentNode.parentNode as HTMLTableRowElement
-    let name = ""
-    let td = tr.querySelectorAll('td')
-    if (td) name = td[0].innerText
+    const tr = btn.parentNode!.parentNode as HTMLTableRowElement
+    const td = tr.querySelectorAll('td')
+    const name = td[0].innerText
     this.state['Product'].forEach((p:Product, i:number) => {
       if (p.Name == name) this.state['Product'].splice(i, 1)
     })
     const table = tr.parentNode as HTMLTableElement
-    if (!table) return
     table.removeChild(tr)
-    
     const span = table.querySelector('span')
-    if (!span) return
-    span.innerText = this.total()
+    span!.innerText = this.total()
   }
 
   submit() {
@@ -113,7 +101,6 @@ export default class FormElement extends payment(render(HTMLElement)) {
     input.addEventListener('change', this.totalChanged.bind(this))
     
     const btn = root.querySelectorAll('button')
-    if (2 > btn.length) return
     btn[0].addEventListener('click', this.add.bind(this))
     btn[btn.length-1].addEventListener('click', this.submit.bind(this))
     for (let i=1; i < btn.length-1; ++i ) {

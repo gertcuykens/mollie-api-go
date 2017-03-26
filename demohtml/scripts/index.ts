@@ -24,18 +24,16 @@ function show(...args:string[]) {
 
 ;(function(){
   requirejs(['menuelement'], () => {
-    let menu = document.querySelector('menu-ts')
-    if (menu) {
-      menu.addEventListener('transaction', () => { requirejs(['transactionelement'], () => { show('menu-ts', 'transaction-ts') }) })      
-      menu.addEventListener('form', () => { requirejs(['formelement', 'issuerelement', 'methodelement'], () => { show('menu-ts', 'form-ts') }) })
-      menu.addEventListener('test', () => { requirejs(['formelement_test'], () => { show('menu-ts', 'form-test') }) })
-      menu.addEventListener('online', () => { online(); show('menu-ts') })
-      menu.addEventListener('offline', () => { offline(); show('menu-ts') })
-      const page = window.location.search.substr(1)
-      let event = new CustomEvent('form', { 'detail': null })
-      if (page) event = new CustomEvent(page, { 'detail': null })
-      menu.dispatchEvent(event)
-    }
+    const menu = document.querySelector('menu-ts')
+    menu!.addEventListener('transaction', () => { requirejs(['transactionelement'], () => { show('menu-ts', 'transaction-ts') }) })      
+    menu!.addEventListener('form', () => { requirejs(['formelement', 'issuerelement', 'methodelement'], () => { show('menu-ts', 'form-ts') }) })
+    menu!.addEventListener('test', () => { requirejs(['formelement_test'], () => { show('menu-ts', 'form-test') }) })
+    menu!.addEventListener('online', () => { online(); show('menu-ts') })
+    menu!.addEventListener('offline', () => { offline(); show('menu-ts') })
+    const page = window.location.search.substr(1)
+    let event = new CustomEvent('form', { 'detail': null })
+    if (page) event = new CustomEvent(page, { 'detail': null })
+    menu!.dispatchEvent(event)
   })
 })()
 

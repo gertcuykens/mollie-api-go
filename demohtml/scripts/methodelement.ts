@@ -5,10 +5,9 @@ import {Method, method} from 'mixin'
 @defineClass('method-ts')
 export default class MethodElement extends method(HTMLElement) {
 
-  state:object
+  state:object = {}
   constructor() {
     super()
-    this.state = {}
   }
 
   selector(select:HTMLSelectElement, json:any){
@@ -25,9 +24,8 @@ export default class MethodElement extends method(HTMLElement) {
     const root = this.attachShadow({mode: 'open'});
     root.innerHTML = `<slot name="input"></slot>`
     const select = this.querySelector('select')
-    if (!select) return
     this.method()
-      .then(json => this.selector(select, json))
+      .then(json => this.selector(select!, json))
       .catch(err => console.log(err))
   }
 
