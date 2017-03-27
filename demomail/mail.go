@@ -1,4 +1,4 @@
-package demomodule
+package demomail
 
 import (
 	"bytes"
@@ -14,7 +14,7 @@ const SENDER = "Demo <demo@mollie-api-go.appspotmail.com>"
 // 	return []string{}
 // }
 
-func mail(ctx context.Context, email string, buf *bytes.Buffer) error {
+func send(ctx context.Context, email string, buf *bytes.Buffer) error {
 
 	msg := &gmail.Message{
 		Sender: SENDER,

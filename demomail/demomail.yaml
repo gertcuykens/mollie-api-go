@@ -1,17 +1,25 @@
 application: mollie-api-go
-module: demo
+module: mail
 version: v1
 runtime: go
 api_version: go1
 threadsafe: true
 
 handlers:
+- url: /_ah/mail/(.*)
+  script: _go_app
+  secure: always
+- url: /_ah/bounce
+  script: _go_app
+  secure: always
 - url: /(.*\.json)
   script: _go_app
   secure: always
-- url: /(.*\.csv)
-  script: _go_app
-  secure: always
+# redirect_http_response_code: 301
+
+inbound_services:
+- mail
+- mail_bounce
 
 skip_files:
 - ^(.*/)?\.DS_Store$
