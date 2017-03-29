@@ -6,4 +6,4 @@ Mollie api.
 
     go get -u github.com/gertcuykens/mollie-api-go
 
-You need Safari 10.1 for this [demo](https://mollie-api-go.appspot.com)
+You need Safari 10.1+ for this [demo](https://mollie-api-go.appspot.com)
