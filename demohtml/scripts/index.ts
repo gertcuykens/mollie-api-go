@@ -2,10 +2,12 @@ import './prototype.js'
 import './menuelement.js'
 
 function offline() {
-  navigator.serviceWorker.getRegistrations()
-    .then(function(registrations:any) {
-      for(let registration of registrations) registration.unregister()
-    })
+  if ('serviceWorker' in navigator){
+    navigator.serviceWorker.getRegistrations()
+      .then(function(registrations:any) {
+        for(let registration of registrations) registration.unregister()
+      })
+  }
 }
 
 function online() {

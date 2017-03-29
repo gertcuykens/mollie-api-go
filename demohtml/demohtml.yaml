@@ -23,7 +23,7 @@ handlers:
   mime_type: application/json
   secure: always
 - url: /service.js
-  static_files: service.js
+  static_files: workers/service.js
   upload: service.js
   mime_type: application/javascript
   secure: always
@@ -39,9 +39,9 @@ handlers:
 skip_files:
 - ^(.*/)?\.DS_Store$
 - ^(.*/)?.*\.yaml$
-- tsconfig.json
+- scripts/tsconfig.json
+- workers/tsconfig.json
 - README.md
-- Makefile
 
 # - url: /(.*\.map)
 #   static_files: ./\1

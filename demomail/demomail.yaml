@@ -24,5 +24,3 @@ inbound_services:
 skip_files:
 - ^(.*/)?\.DS_Store$
 - ^(.*/)?.*\.yaml$
-- README.md
-- Makefile
