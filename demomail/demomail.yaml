@@ -6,13 +6,10 @@ api_version: go1
 threadsafe: true
 
 handlers:
-- url: /_ah/mail/(.*)
+- url: /.*
   script: _go_app
   secure: always
-- url: /_ah/bounce
-  script: _go_app
-  secure: always
-- url: /(.*\.json)
+- url: /
   script: _go_app
   secure: always
 # redirect_http_response_code: 301
@@ -24,3 +21,10 @@ inbound_services:
 skip_files:
 - ^(.*/)?\.DS_Store$
 - ^(.*/)?.*\.yaml$
+
+# - url: /_ah/mail/.*
+#   script: _go_app
+#   secure: always
+# - url: /_ah/bounce
+#   script: _go_app
+#   secure: always

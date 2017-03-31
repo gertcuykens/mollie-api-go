@@ -6,10 +6,10 @@ api_version: go1
 threadsafe: true
 
 handlers:
-- url: /(.*\.json)
+- url: /.*
   script: _go_app
   secure: always
-- url: /(.*\.csv)
+- url: /
   script: _go_app
   secure: always
 

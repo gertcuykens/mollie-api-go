@@ -9,10 +9,11 @@ import (
 )
 
 func init() {
-	http.Handle("/mail.json", httx.CorsHandler(appengine.ContextHandler{mailFn}))
+	http.Handle("/", httx.CorsHandler(appengine.ContextHandler{mailFn}))
 }
 
 func mailFn(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "must-revalidate")
 	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte("\"offline\""))
 }

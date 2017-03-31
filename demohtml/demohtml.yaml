@@ -6,12 +6,6 @@ api_version: go1
 threadsafe: true
 
 handlers:
-- url: /(.*\.md)
-  script: _go_app
-  secure: always
-- url: /
-  script: _go_app
-  secure: always
 - url: /favicon.ico
   static_files: favicon.ico
   upload: favicon.ico
@@ -34,6 +28,12 @@ handlers:
 - url: /img
   static_dir: img
   mime_type: image/png
+  secure: always
+- url: /.*
+  script: _go_app
+  secure: always
+- url: /
+  script: _go_app
   secure: always
 
 skip_files:

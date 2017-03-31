@@ -1,8 +1,10 @@
 application: mollie-api-go
 
 dispatch:
-- url: "*/_ah/*"
-  module: demo
+- url: "*/_ah/mail/*"
+  module: mail
+- url: "*/_ah/bounce"
+  module: mail
 - url: "*/method.json"
   module: demo
 - url: "*/issuer.json"
@@ -15,5 +17,3 @@ dispatch:
   module: demo
 - url: "*/payment.csv"
   module: demo
-- url: "*/"
-  module: default
