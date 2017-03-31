@@ -27,10 +27,12 @@ export default class FormElement_test extends FormElement {
     super()
   }
   connectedCallback() {
-    const pre = document.createElement('pre') 
+    const pre = document.createElement('pre')
+    pre.style.margin = '0 20px'
     pre.innerHTML = JSON.stringify(this.state, null, '\t')
     const p = document.createElement('p') 
     p.innerHTML = 'Total: '+ this.total()
+    p.style.margin = '10px 20px'
     this.appendChild(pre)    
     this.appendChild(p)
   }

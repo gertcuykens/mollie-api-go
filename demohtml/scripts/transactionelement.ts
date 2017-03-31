@@ -8,6 +8,7 @@ export default class TransactionElement extends transaction(HTMLElement) {
   }
   render(json:{}) {
     //while (this.hasChildNodes()) this.removeChild(this.lastChild)
+    this.style.margin = '0 20px'
     this.innerHTML = 'Payment screen: '
     const t:Transaction = json as Transaction
     const a = document.createElement('a')
