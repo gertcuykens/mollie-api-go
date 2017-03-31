@@ -16,6 +16,7 @@ export default class TransactionElement extends transaction(HTMLElement) {
     a.innerHTML = localStorage.getItem('payment') || ''
     const pre = document.createElement('pre')
     pre.innerHTML = JSON.stringify(t, null, '\t')
+    pre.style.margin = '0 20px'
     this.appendChild(a)
     this.appendChild(pre)  
   }
