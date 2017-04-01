@@ -16,6 +16,7 @@ export default class MenuElement extends render(HTMLElement) {
     li[1].addEventListener('click', ()=>{ this.dispatchEvent(click2) })
     li[2].addEventListener('click', ()=>{ document.location.href = 'payment.csv' }) // http://localhost:8081/
     li[3].addEventListener('click', ()=>{ this.dispatchEvent(test) })
+    this.style.margin = '20px 0'
   }
 
   connectedCallback() { 

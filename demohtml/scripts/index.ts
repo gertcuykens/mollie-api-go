@@ -15,14 +15,16 @@ function online() {
 }
 
 function show(...args:string[]) {
-  const elms = document.querySelectorAll('body > *')
+  const elms = document.querySelectorAll('body > *') as NodeListOf<HTMLElement>
   for (let i = 0; i < elms.length; ++i) {
     let next = false
     args.forEach( (v) => {if (v.toUpperCase() == elms[i].tagName) next = true; })
-    if (next) {elms[i].removeAttribute('hidden'); continue;}
+    //if (next) {elms[i].removeAttribute('hidden'); continue;}
+    if (next) {elms[i].style.display = 'block'; continue;}    
     if ('STYLE' == elms[i].tagName) continue;
     if ('SCRIPT' == elms[i].tagName) continue;
-    elms[i].setAttribute('hidden', 'true')
+    //elms[i].setAttribute('hidden', 'true')
+    elms[i].style.display = 'none'
   }
 }
 

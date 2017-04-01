@@ -8,7 +8,6 @@ export default class TransactionElement extends transaction(HTMLElement) {
   }
   render(json:{}) {
     //while (this.hasChildNodes()) this.removeChild(this.lastChild)
-    this.style.margin = '0 20px'
     this.innerHTML = 'Payment screen: '
     const t:Transaction = json as Transaction
     const a = document.createElement('a')
@@ -16,7 +15,6 @@ export default class TransactionElement extends transaction(HTMLElement) {
     a.innerHTML = localStorage.getItem('payment') || ''
     const pre = document.createElement('pre')
     pre.innerHTML = JSON.stringify(t, null, '\t')
-    pre.style.margin = '0 20px'
     this.appendChild(a)
     this.appendChild(pre)  
   }
