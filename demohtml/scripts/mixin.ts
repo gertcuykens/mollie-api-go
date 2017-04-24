@@ -42,7 +42,7 @@ export type Payment = {
 export function payment < T extends Constructor<HTMLElement> > (Base: T) {
   return class extends Base {
     payment(state: Order):Promise<{}> {
-      return fetch('payment.json', {
+      return fetch('demo/payment.json', {
         headers: {
           'Accept': 'application/json',
           'Accept-Encoding': 'gzip',
@@ -77,7 +77,7 @@ export type Transaction = {
 export function transaction < T extends Constructor<HTMLElement> > (Base: T) {
   return class extends Base {
     transaction(id: string):Promise<{}> {
-      return fetch('transaction.json?id='+id, {
+      return fetch('demo/transaction.json?id='+id, {
         headers: {
           'Accept': 'application/json',
           'Accept-Encoding': 'gzip',
@@ -101,7 +101,7 @@ export type Method = {
 export function method < T extends Constructor<HTMLElement> > (Base: T) {
   return class extends Base {
     method():Promise<{}> {
-      return fetch('method.json', {
+      return fetch('demo/method.json', {
         headers: {
           'Accept': 'application/json',
           'Accept-Encoding': 'gzip',
@@ -124,7 +124,7 @@ export type Issuer = {
 export function issuer < T extends Constructor<HTMLElement> > (Base: T) {
   return class extends Base {
     issuer():Promise<{}> {
-      return fetch('issuer.json', {
+      return fetch('demo/issuer.json', {
         headers: {
           'Accept': 'application/json',
           'Accept-Encoding': 'gzip',

@@ -1,6 +1,4 @@
-application: mollie-api-go
-module: demo
-version: v1
+service: demo
 runtime: go
 api_version: go1
 threadsafe: true

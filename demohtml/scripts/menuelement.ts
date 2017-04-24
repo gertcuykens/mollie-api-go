@@ -14,7 +14,7 @@ export default class MenuElement extends render(HTMLElement) {
     const li = root.querySelectorAll('li')
     li[0].addEventListener('click', ()=>{ this.dispatchEvent(click1) })
     li[1].addEventListener('click', ()=>{ this.dispatchEvent(click2) })
-    li[2].addEventListener('click', ()=>{ document.location.href = 'payment.csv' }) // http://localhost:8081/
+    li[2].addEventListener('click', ()=>{ document.location.href = 'demo/payment.csv' })
     li[3].addEventListener('click', ()=>{ this.dispatchEvent(test) })
     this.style.padding = '20px 0'
   }

@@ -1,33 +1,37 @@
-application: mollie-api-go
-module: default
-version: v1
+service: default
 runtime: go
 api_version: go1
 threadsafe: true
 
 handlers:
 - url: /favicon.ico
-  static_files: favicon.ico
-  upload: favicon.ico
+  static_files: img/favicon.ico
+  upload: img/favicon.ico
   mime_type: image/x-icon
   secure: always
 - url: /manifest.json
-  static_files: manifest.json
-  upload: manifest.json
-  mime_type: application/json
+  static_files: md/manifest.json
+  upload: md/manifest.json
+  mime_type: application/json; charset=UTF-8
   secure: always
 - url: /service.js
   static_files: workers/service.js
-  upload: service.js
-  mime_type: application/javascript
+  upload: workers/service.js
+  mime_type: application/javascript; charset=UTF-8
   secure: always
 - url: /scripts
   static_dir: scripts
-  mime_type: application/javascript
+  mime_type: application/javascript; charset=UTF-8
   secure: always
-- url: /img
-  static_dir: img
+- url: /(.*\.png)
+  static_files: img/\1
+  upload: img/(.*\.png)
   mime_type: image/png
+  secure: always
+- url: /(.*\.svg)
+  static_files: img/\1
+  upload: img/(.*\.svg)
+  mime_type: image/svg+xml
   secure: always
 - url: /.*
   script: _go_app
@@ -46,7 +50,7 @@ skip_files:
 # - url: /(.*\.map)
 #   static_files: ./\1
 #   upload: /(.*\.map)
-#   mime_type: application/javascript
+#   mime_type: application/javascript; charset=UTF-8
 
 # secure: always
 # login: admin

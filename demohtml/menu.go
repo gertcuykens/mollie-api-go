@@ -1,4 +1,4 @@
-package md
+package demohtml
 
 import (
 	"crypto/sha1"

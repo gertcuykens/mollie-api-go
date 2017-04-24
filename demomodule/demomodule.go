@@ -23,12 +23,12 @@ const SERVER = "https://mollie-api-go.appspot.com"
 
 func init() {
 	mollie.Token = "test_D3BBiC7YpALzMnXmUKqNpQSzuqdaHa"
-	http.Handle("/payment.json", httx.CorsHandler(appengine.ContextHandler{payment}))
-	http.Handle("/method.json", httx.CorsHandler(appengine.ContextHandler{method}))
-	http.Handle("/issuer.json", httx.CorsHandler(appengine.ContextHandler{issuer}))
-	http.Handle("/webhook.json", httx.CorsHandler(appengine.ContextHandler{webhook}))
-	http.Handle("/transaction.json", httx.CorsHandler(appengine.ContextHandler{transaction}))
-	http.Handle("/payment.csv", httx.CorsHandler(appengine.ContextHandler{hCsv}))
+	http.Handle("/demo/payment.json", httx.CorsHandler(appengine.ContextHandler{payment}))
+	http.Handle("/demo/method.json", httx.CorsHandler(appengine.ContextHandler{method}))
+	http.Handle("/demo/issuer.json", httx.CorsHandler(appengine.ContextHandler{issuer}))
+	http.Handle("/demo/webhook.json", httx.CorsHandler(appengine.ContextHandler{webhook}))
+	http.Handle("/demo/transaction.json", httx.CorsHandler(appengine.ContextHandler{transaction}))
+	http.Handle("/demo/payment.csv", httx.CorsHandler(appengine.ContextHandler{hCsv}))
 }
 
 func payment(ctx context.Context, w http.ResponseWriter, r *http.Request) {

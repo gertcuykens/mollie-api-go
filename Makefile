@@ -1,35 +1,36 @@
-#ALL := $(wildcard demohtml/css/*.css)
-#CSS := $(filter-out %.min.css,$(ALL))
+PROJECT := mollie-api-go
+ALL := $(wildcard demohtml/css/*.css)
+CSS := $(filter-out %.min.css,$(ALL))
 JS := $(wildcard demohtml/scripts/*.js)
 
-.PHONY: default uglify build install clean test dispatch module html rollback index
+.PHONY: server uglify build install dispatch acme module html test install clean index
 
-default: build
-	dev_appserver.py --host=0.0.0.0 demohtml/demohtml.yaml demomodule/demomodule.yaml
+server: build
+	dev_appserver.py --host=0.0.0.0 demohtml/default.yaml demomodule/demo.yaml
 
-uglify: build $(JS) #$(CSS)
-	uglifyjs node_modules/alameda/alameda.js -o scripts/alameda.js -c
-	uglifyjs ../demoservice/service.js -o scripts/service.js -c
+uglify: build $(JS) $(CSS)
 
 %.js:
 	uglifyjs $@ -o $@ -c
 
-#%.css:
-#	uglifycss $@ > $(patsubst %.css,%.min.css,$@)
+%.css:
+	uglifycss $@ > $(patsubst %.css,%.min.css,$@)
 
 build:
 	tsc --pretty -p demohtml/scripts
 	tsc --pretty -p demohtml/workers
-# cp demohtml/workers/service.js demohtml/service.js
 
 dispatch:
-	appcfg.py update_dispatch ./
+	gcloud app deploy dispatch.yaml --project $(PROJECT)
+
+acme:
+	gcloud app deploy acme/acme.yaml --project $(PROJECT)
 
 module:
-	appcfg.py update demomodule/demomodule.yaml
+	gcloud app deploy demomodule/demo.yaml --project $(PROJECT)
 
 html: build
-	appcfg.py update demohtml/demohtml.yaml
+	gcloud app deploy demohtml/default.yaml --project $(PROJECT)
 
 test:
 	go test -v ./demomodule
@@ -51,13 +52,9 @@ clean:
 	-rm demohtml/workers/*.map
 	-rm demohtml/css/*.min.css
 
-# rollback:
-# 	appcfg.py rollback demomodule/demomodule.yaml
-# 	appcfg.py rollback demohtml/demohtml.yaml
-
 # index:
-# 	appcfg.py update_indexes demomodule/index.yaml
-# 	appcfg.py vacuum_indexes demomodule/index.yaml
+# 	gcloud datastore create-indexes demomodule/index.yaml
+# 	gcloud datastore cleanup-indexes demomodule/index.yaml
 
 # https://v1-dot-demo-dot-mollie-api-go.appspot.com
 # https://v1-dot-default-dot-mollie-api-go.appspot.com

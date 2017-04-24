@@ -1,0 +1,15 @@
+runtime: go
+threadsafe: true
+api_version: go1
+service: acme
+default_expiration: 0s
+
+handlers:
+- url: /\.well-known/acme-challenge/(.*)
+  static_files: acme/\1
+  upload: acme/(.*)
+  mime_type: text/plain
+
+skip_files:
+- ^(.*/)?\.DS_Store$
+- ^(.*/)?.*\.yaml$

@@ -1,6 +1,4 @@
-application: mollie-api-go
-module: mail
-version: v1
+service: mail
 runtime: go
 api_version: go1
 threadsafe: true
